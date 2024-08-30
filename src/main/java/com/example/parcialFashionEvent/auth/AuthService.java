@@ -24,6 +24,7 @@ public class AuthService {
                 .apellido(request.getApellido())
                 .username(request.getUsername())
                 .password(request.getPassword())
+                .rol(Usuario.Role.INVITADO)
                 .build();
 
         userRepository.save(user);

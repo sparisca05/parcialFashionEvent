@@ -36,12 +36,17 @@ public class Usuario implements UserDetails {
 
     private String password;
 
-
-    Role rol;
+    private Role rol;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(rol.name()));
     }
-
+    public enum Role {
+        ADMIN,
+        ORGANIZADOR,
+        MODELO,
+        INVITADO
+    }
 }
+
