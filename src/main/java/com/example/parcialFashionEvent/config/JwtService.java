@@ -1,5 +1,6 @@
 package com.example.parcialFashionEvent.config;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -36,5 +37,23 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
+    public String getUsernameFromToken(String token) {
+        return null;
+    }
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        return false;
+    }
+
+    private Claims getAllClaims(String token) {
+        return Jwts
+                .parserBuilder()
+                .setSigningKey(getKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
 
 }
