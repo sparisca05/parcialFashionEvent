@@ -1,5 +1,6 @@
 package com.example.parcialFashionEvent.config;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -17,7 +18,9 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "secret";
+    // Replace this with a secure key in a real application, ideally fetched from environment variables
+    Dotenv dotenv = Dotenv.load();
+    private static final String SECRET_KEY = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
 
     public String getToken(UserDetails user) {
         return getToken(new HashMap<>(), user);
