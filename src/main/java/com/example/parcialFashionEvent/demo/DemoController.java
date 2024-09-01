@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
 
     @PostMapping(value = "demo")
-    public String demo() {
-        return "Welcome to Parcial Fashion Event Demo";
+    public String welcome() {
+        return "Welcome from secure endpoint!";
     }
 }
