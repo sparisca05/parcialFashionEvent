@@ -1,6 +1,7 @@
 package com.example.parcialFashionEvent.auth;
 
 import com.example.parcialFashionEvent.config.JwtService;
+import com.example.parcialFashionEvent.entity.Role;
 import com.example.parcialFashionEvent.entity.Usuario;
 import com.example.parcialFashionEvent.repositories.IUsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,7 @@ public class AuthService {
                 .apellido(request.getApellido())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .rol(Usuario.Role.INVITADO)
+                .rol(Role.INVITADO)
                 .build();
 
         userRepository.save(user);
