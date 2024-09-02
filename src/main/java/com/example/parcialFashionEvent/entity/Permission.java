@@ -1,5 +1,6 @@
 package com.example.parcialFashionEvent.entity;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -14,5 +15,6 @@ public enum Permission {
     ORGANIZADOR_UPDATE("organizador:update"),
     ORGANIZADOR_DELETE("organizador:delete");
 
+    @Getter
     private final String permission;
 }
