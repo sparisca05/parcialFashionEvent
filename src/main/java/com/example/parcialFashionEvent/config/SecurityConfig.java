@@ -43,6 +43,8 @@ public class SecurityConfig {
                                 .requestMatchers(PUT, "/api/v1/organizador/**").hasAnyAuthority(ADMIN_UPDATE.name(), ORGANIZADOR_UPDATE.name())
                                 .requestMatchers(DELETE, "/api/v1/organizador/**").hasAnyAuthority(ADMIN_DELETE.name(), ORGANIZADOR_DELETE.name())
 
+                                .requestMatchers("/api/v1/modelo/**").hasRole(MODELO.name())
+
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager ->

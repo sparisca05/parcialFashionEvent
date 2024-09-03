@@ -1,4 +1,4 @@
-package com.example.parcialFashionEvent.demo;
+package com.example.parcialFashionEvent.controllers;
 
 import org.springframework.web.bind.annotation.*;
 
