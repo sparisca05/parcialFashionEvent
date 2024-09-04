@@ -37,7 +37,7 @@ public class AuthService {
                 .apellido(request.getApellido())
                 .username(request.getUsername())
                 .password(request.getPassword())
-                .rol(Role.ADMIN)
+                .rol(Role.INVITADO)
                 .build();
 
         usuarioService.saveUser(user);
