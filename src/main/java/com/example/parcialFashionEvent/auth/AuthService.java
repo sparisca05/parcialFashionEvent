@@ -4,6 +4,7 @@ import com.example.parcialFashionEvent.config.JwtService;
 import com.example.parcialFashionEvent.entity.Role;
 import com.example.parcialFashionEvent.entity.Usuario;
 import com.example.parcialFashionEvent.repositories.IUsuarioRepository;
+import com.example.parcialFashionEvent.services.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,8 +17,8 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final IUsuarioRepository userRepository;
+    private final UsuarioService usuarioService;
     private final JwtService jwtService;
-    private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse login(LoginRequest request) {
@@ -35,11 +36,11 @@ public class AuthService {
                 .nombre(request.getNombre())
                 .apellido(request.getApellido())
                 .username(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .rol(Role.INVITADO)
+                .password(request.getPassword())
+                .rol(Role.ADMIN)
                 .build();
 
-        userRepository.save(user);
+        usuarioService.saveUser(user);
 
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))

@@ -1,0 +1,59 @@
+package com.example.parcialFashionEvent.controllers;
+
+import com.example.parcialFashionEvent.entity.Evento;
+import com.example.parcialFashionEvent.services.EventoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("api/v1/eventos")
+public class EventoController {
+
+    @Autowired
+    private EventoService eventoService;
+
+    // Ver todos los eventos
+    @GetMapping
+    public List<Evento> getEventos() {
+        return eventoService.getAllEventos();
+    }
+
+    // Ver un evento por su id
+    @GetMapping("/{id}")
+    public Evento getEventoById(@PathVariable Long id) {
+        return eventoService.getEventoById(id);
+    }
+
+    // Comprar un ticket para un evento con el usuario actual
+    @PutMapping("/{id}/comprar-ticket")
+    public String addInvitado(@PathVariable Long id) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return eventoService.addInvitado(username, id);
+    }
+
+    // Crear un nuevo evento
+    @PostMapping
+    @PreAuthorize("hasAnyAuthority('admin:write', 'organizador:write')")
+    public Evento postEvento(@RequestBody Evento evento) {
+        return eventoService.saveEvento(evento);
+    }
+
+    // Modificar un evento
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('admin:update', 'organizador:update')")
+    public Evento updateEvento(@RequestBody Evento evento, @PathVariable Long id) {
+        return eventoService.updateEventoById(evento, id);
+    }
+
+    // Eliminar un evento
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('admin:delete', 'organizador:delete')")
+    public String deleteEvento(@PathVariable Long id) {
+        return eventoService.deleteEvento(id);
+    }
+}

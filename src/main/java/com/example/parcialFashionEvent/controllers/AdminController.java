@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/admin")
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
+
     @Autowired
     private IUsuarioRepository userRepository;
 
+    // Panel de administrador
     @GetMapping
     @PreAuthorize("hasAuthority('admin:read')")
     public String get() {
@@ -31,7 +33,7 @@ public class AdminController {
         return "POST: Admin";
     }
 
-    @PutMapping("/assign-role")
+    @PutMapping("/asignar-rol")
     @PreAuthorize("hasAuthority('admin:update')")
     public ResponseEntity<String> assignRoleToUser(@RequestBody AsignarRolRequest request) {
         Usuario user = userRepository.findByUsername(request.getUsername())
