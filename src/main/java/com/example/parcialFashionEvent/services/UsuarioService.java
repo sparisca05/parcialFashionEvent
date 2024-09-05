@@ -1,10 +1,11 @@
 package com.example.parcialFashionEvent.services;
 
+import com.example.parcialFashionEvent.entity.Portafolio;
 import com.example.parcialFashionEvent.entity.Usuario;
+import com.example.parcialFashionEvent.entity.UsuarioInfo;
 import com.example.parcialFashionEvent.repositories.IUsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,6 +30,17 @@ public class UsuarioService implements UserDetailsService {
         System.out.println("Usuario guardado con éxito");
     }
 
+    public UsuarioInfo getUserInfoById(Long userId) {
+        Usuario user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        UsuarioInfo userInfo = new UsuarioInfo();
+        userInfo.setNombre(user.getNombre());
+        userInfo.setApellido(user.getApellido());
+        userInfo.setUsername(user.getUsername());
+        userInfo.setPortafolio(user.getPortafolio());
+        return userInfo;
+    }
+
     public Usuario getUserByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
@@ -46,5 +58,35 @@ public class UsuarioService implements UserDetailsService {
                 )).orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
     }
 
+    public Usuario updateUserById(Usuario request, Long userId){
+        Usuario user = userRepository.findById(userId).get();
+
+        user.setNombre(request.getNombre());
+        user.setApellido(request.getApellido());
+        user.setCorreo(request.getCorreo());
+        user.setUsername(request.getUsername());
+        user.setPassword(request.getPassword());
+        saveUser(user);
+
+        return user;
+    }
+
+    public Usuario updatePortafolioByUserId(Portafolio portafolio, Long userId) {
+        Usuario user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        user.setPortafolio(portafolio);
+        saveUser(user);
+
+        return user;
+    }
+
+    public String deleteUser(Long userId) {
+        Usuario user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        userRepository.delete(user);
+        return "Usuario eliminado";
+    }
 
 }
+
