@@ -1,9 +1,11 @@
 package com.example.parcialFashionEvent.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/modelo")
+@PreAuthorize("hasRole('MODELO')")
 public class ModeloController {
 
     @GetMapping

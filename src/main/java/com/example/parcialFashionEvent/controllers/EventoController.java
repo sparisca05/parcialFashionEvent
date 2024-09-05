@@ -45,14 +45,14 @@ public class EventoController {
     }
 
     // Crear un nuevo evento
-    @PostMapping
+    @PostMapping("/nuevo-evento")
     @PreAuthorize("hasAnyAuthority('admin:write', 'organizador:write')")
     public Evento postEvento(@RequestBody Evento evento) {
         return eventoService.saveEvento(evento);
     }
 
     // Modificar un evento
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/modificar-evento")
     @PreAuthorize("hasAnyAuthority('admin:update', 'organizador:update')")
     public Evento updateEvento(@RequestBody Evento evento, @PathVariable Long id) {
         return eventoService.updateEventoById(evento, id);
