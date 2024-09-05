@@ -36,6 +36,14 @@ public class EventoController {
         return eventoService.addInvitado(username, id);
     }
 
+    // Inscribirse a un evento como modelo
+    @PutMapping("/{id}/inscribirse")
+    @PreAuthorize("hasRole('MODELO')")
+    public String addParticipante(@PathVariable Long id) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return eventoService.addParticipante(username, id);
+    }
+
     // Crear un nuevo evento
     @PostMapping
     @PreAuthorize("hasAnyAuthority('admin:write', 'organizador:write')")

@@ -65,4 +65,17 @@ public class EventoService {
         }
         return "Usuario " + username + " se agregó al evento " + evento.getNombre();
     }
+
+    @Transactional
+    public String addParticipante(String username, Long eventoId) throws RuntimeException {
+        Evento evento = getEventoById(eventoId);
+        Usuario usuario = usuarioService.getUserByUsername(username);
+        if (!evento.getParticipantes().contains(usuario)){
+            evento.addParticipante(usuario);
+            eventoRepository.save(evento);
+        } else {
+            throw new RuntimeException("Participante ya se inscribió al evento");
+        }
+        return "Participante " + username + " se inscribió al evento " + evento.getNombre();
+    }
 }
