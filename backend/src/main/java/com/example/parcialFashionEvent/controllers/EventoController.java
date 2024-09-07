@@ -3,6 +3,7 @@ package com.example.parcialFashionEvent.controllers;
 import com.example.parcialFashionEvent.entity.Evento;
 import com.example.parcialFashionEvent.services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/eventos")
+@CrossOrigin(origins = "http://localhost:5173")
 public class EventoController {
 
     @Autowired
@@ -18,8 +20,9 @@ public class EventoController {
 
     // Ver todos los eventos
     @GetMapping
-    public List<Evento> getEventos() {
-        return eventoService.getAllEventos();
+    public ResponseEntity<List<Evento>> getEventos() {
+        List<Evento> eventos = eventoService.getAllEventos();
+        return ResponseEntity.ok(eventos);
     }
 
     // Ver un evento por su id

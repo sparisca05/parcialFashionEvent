@@ -5,6 +5,7 @@ interface Evento {
     id: number;
     nombre: string;
     fecha: string;
+    precio: number;
 }
 
 const EventoList: React.FC = () => {
@@ -13,11 +14,11 @@ const EventoList: React.FC = () => {
 
     // Efecto que hace la petición cuando el componente se monta
     useEffect(() => {
-        fetch('/api/v1/eventos', {
+        fetch('http://localhost:8080/api/v1/eventos', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
         })
             .then(response => response.json())
             .then(data => {
@@ -40,7 +41,7 @@ const EventoList: React.FC = () => {
             <ul>
                 {eventos.map(evento => (
                     <li key={evento.id}>
-                        {evento.nombre} {evento.fecha}
+                        {evento.nombre} {evento.fecha} {evento.precio}
                     </li>
                 ))}
             </ul>
