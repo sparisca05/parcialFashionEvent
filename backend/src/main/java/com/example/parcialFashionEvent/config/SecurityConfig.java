@@ -38,7 +38,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests(authRequest ->
                         authRequest
                                 .requestMatchers("/auth/**").permitAll() // Permitir acceso sin autenticación
-                                .requestMatchers(GET, "api/v1/eventos", "api/v1/eventos/**").permitAll() // Permitir ver eventos sin autenticación
+                                .requestMatchers(GET, "api/v1/eventos", "api/v1/eventos/**", "api/v1/usuario/**").permitAll() // Permitir ver eventos sin autenticación
 
                                 .requestMatchers("/api/v1/organizador/**").hasAnyRole(ADMIN.name(), ORGANIZADOR.name())
                                 .requestMatchers(GET, "/api/v1/organizador/**").hasAnyAuthority(ADMIN_READ.name(), ORGANIZADOR_READ.name())

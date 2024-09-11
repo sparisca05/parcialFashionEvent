@@ -1,11 +1,10 @@
-import EventosList from "./components/EventosList.tsx";
+import Home from "./screens/Home.tsx";
 
 function App() {
 
     return (
         <div className="App">
-        <h1>Eventos</h1>
-        <EventosList />
+        <Home />
         </div>
     )
 }
