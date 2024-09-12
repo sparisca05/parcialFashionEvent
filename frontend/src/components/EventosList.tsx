@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 // Definición del tipo de datos que esperamos
 interface Evento {
@@ -14,16 +15,10 @@ const EventoList: React.FC = () => {
 
     // Efecto que hace la petición cuando el componente se monta
     useEffect(() => {
-        fetch('http://localhost:8080/api/v1/eventos', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-                setEventos(data);  // Guardar los datos en el estado
-                setLoading(false);  // Detener la carga
+        axios.get('http://localhost:8080/api/v1/eventos')
+            .then((response) => {
+                setEventos(response.data);
+                setLoading(false);
             })
             .catch(error => {
                 console.error('Error:', error);

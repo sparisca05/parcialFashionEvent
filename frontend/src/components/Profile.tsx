@@ -1,48 +1,85 @@
 import React, { useState, useEffect } from 'react';
+import {useNavigate} from "react-router-dom";
 
 // Definición del tipo de datos que esperamos
 interface UserInfo {
-    id: number;
     nombre: string;
     apellido: string;
+    username: string;
+    rol: string;
 }
 
 const Profile: React.FC = () => {
-    const [user, setUser] = useState<UserInfo[]>([]);  // Estado para almacenar la lista de datos
+    const [user, setUser] = useState<UserInfo | null>(null);  // Estado para almacenar el usuario
     const [loading, setLoading] = useState<boolean>(true);     // Estado para mostrar una carga
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     // Efecto que hace la petición cuando el componente se monta
     useEffect(() => {
-        fetch('http://localhost:8080/api/v1/usuario/', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-                setUser(data);  // Guardar los datos en el estado
-                setLoading(false);  // Detener la carga
-            })
-            .catch(error => {
-                console.error('Error:', error);
+        const token = localStorage.getItem("authToken");
+
+        if (!token) {
+            // Si no hay token, redirigir al login
+            navigate('/login');
+            return;
+        }
+
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/api/v1/usuario/perfil', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    const data: UserInfo = await response.json();
+                    setUser(data); // Almacenar los datos del usuario
+                    setLoading(false);
+                } else {
+                    // Si el token es inválido o ha expirado, redirigir al login
+                    setError('No autorizado');
+                    localStorage.removeItem('authToken');
+                    navigate('/login');
+                }
+            } catch (err) {
+                setError('Error de conexión' + err);
                 setLoading(false);
-            });
-    }, []);  // [] para que la petición solo se ejecute al montar el componente
+            }
+        };
+        fetchUserData();
+    }, []);
 
     if (loading) {
         return <div>Cargando datos...</div>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
     }
 
     return (
         <div>
             <h2>Perfil</h2>
             <ul>
-                {user.map(usuario => (
-                    <li key={usuario.id}>
-                        {usuario.nombre} {usuario.apellido}
-                    </li>
-                ))}
+                {user ? (
+                    <div>
+                        <li>
+                            {user.username}
+                        </li>
+                        <li>
+                            {user.nombre} {user.apellido}
+                        </li>
+                        <li>
+                            {user.rol}
+                        </li>
+                    </div>
+                ) : (
+                    <p>No se encontraron datos del usuario.</p>
+                )}
             </ul>
         </div>
     );
