@@ -4,18 +4,20 @@ import { Link, Outlet} from "react-router-dom";
 
 function Home() {
     return (
-            <div>
+            <div className="main-container">
                 <h1>Bienvenido a Dwarf Model Fashion Event</h1>
                 <p>Esta es la página principal.</p>
-                <div style={{display: "flex", flexDirection: "column"}}>
-                    <Link to={"/login"}>Iniciar sesión </Link>
-                    <Link to={"/eventos"}>Ver todos los eventos </Link>
-                    <Link to={"/perfil"}>Ver Perfil </Link>
+                <div className="container">
+                    <div className="auth-container">
+                        <Link to={"/login"} className="btn btn-primary">Iniciar sesión</Link>
+                        <Link to={"/register"} className="btn btn-outline-primary">Registrarse</Link>
+                    </div>
+                    <Link to={"/eventos"} style={{textDecoration: "none"}}>Ver todos los eventos </Link>
                 </div>
 
                 <Outlet />
             </div>
     );
-};
+}
 
 export default Home;

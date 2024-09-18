@@ -33,9 +33,9 @@ const EventoList: React.FC = () => {
     return (
         <div>
             <h2>Lista de Eventos</h2>
-            <ul>
+            <ul className="list-group">
                 {eventos.map(evento => (
-                    <li key={evento.id}>
+                    <li key={evento.id} className="list-group-item">
                         {evento.nombre} {evento.fecha} {evento.precio}
                     </li>
                 ))}
