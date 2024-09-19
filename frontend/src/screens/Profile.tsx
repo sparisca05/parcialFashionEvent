@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import Navbar from "../components/Navbar.tsx";
 
 // Definición del tipo de datos que esperamos
 interface UserInfo {
@@ -62,25 +64,28 @@ const Profile: React.FC = () => {
     }
 
     return (
-        <div>
-            <h2>Perfil</h2>
-            <ul>
-                {user ? (
-                    <div>
-                        <li>
-                            {user.username}
-                        </li>
-                        <li>
-                            {user.nombre} {user.apellido}
-                        </li>
-                        <li>
-                            {user.rol}
-                        </li>
-                    </div>
-                ) : (
-                    <p>No se encontraron datos del usuario.</p>
-                )}
-            </ul>
+        <div className={"main-container"}>
+            <div className={"content-container"}>
+                <Navbar link={'eventos'}/>
+                <h2>Perfil</h2>
+                <ul>
+                    {user ? (
+                        <div>
+                            <li>
+                                {user.username}
+                            </li>
+                            <li>
+                                {user.nombre} {user.apellido}
+                            </li>
+                            <li>
+                                {user.rol}
+                            </li>
+                        </div>
+                    ) : (
+                        <p>No se encontraron datos del usuario.</p>
+                    )}
+                </ul>
+            </div>
         </div>
     );
 };

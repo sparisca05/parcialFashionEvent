@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
 
+import Navbar from "../components/Navbar.tsx";
+
 // Definición del tipo de datos que esperamos
 interface Evento {
     id: number;
@@ -31,17 +33,30 @@ const EventoList: React.FC = () => {
         return <div>Cargando eventos...</div>;
     }
 
+    const noEventosMessage = eventos.length === 0 && <div>No hay eventos disponibles.</div>;
+
     return (
         <div className={"main-container"}>
-            <Link to={'/'} className="btn-close btn-back" aria-label="Close"></Link>
-            <h2>Eventos</h2>
-            <ul className="list-group">
-                {eventos.map(evento => (
-                    <Link to={`/eventos/${evento.id}`} key={evento.id} className="list-group-item">
-                        {evento.nombre} {evento.fecha} {evento.precio}
-                    </Link>
-                ))}
-            </ul>
+            <div className={"content-container"}>
+                <Navbar link={''}/>
+                <h2>Eventos</h2>
+                {noEventosMessage}
+                <ul className="list-group">
+                    {eventos.map(evento => (
+                        <Link to={`/eventos/${evento.id}`} key={evento.id} className="evento">
+                            <p>
+                                {evento.nombre}
+                            </p>
+                            <div>
+                                <p>Fecha: </p>{evento.fecha}
+                            </div>
+                            <div>
+                                <p>Precio: $</p>{evento.precio}
+                            </div>
+                        </Link>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

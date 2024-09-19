@@ -2,6 +2,8 @@ import {useEffect, useState} from 'react';
 import axios from "axios";
 import {Link, useParams} from "react-router-dom";
 
+import Navbar from "../components/Navbar.tsx";
+
 interface Evento {
     id: number;
     nombre: string;
@@ -36,10 +38,13 @@ function EventoView() {
 
     return (
         <div className={"main-container"}>
-            <Link to="/eventos" className="btn-close btn-back" aria-label="Close"></Link>
-            <h2>{evento.nombre}</h2>
-            <p>Fecha: {evento.fecha}</p>
-            <p>Precio: {evento.precio}</p>
+            <div className={"content-container"}>
+                <Navbar link={'eventos'}/>
+                <h2>{evento.nombre}</h2>
+                <p>Fecha: {evento.fecha}</p>
+                <p>Precio: {evento.precio}</p>
+                <Link to={"/"} className={"btn btn-primary"}>Comprar entradas</Link>
+            </div>
         </div>
     );
 }

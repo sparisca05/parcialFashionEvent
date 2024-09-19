@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import EventosList from "./screens/Eventos.tsx";
-import Profile from "./components/Profile.tsx";
+import Profile from "./screens/Profile.tsx";
 import Home from "./screens/Home.tsx";
 import Login from "./screens/Login.tsx";
 import Register from "./screens/Register.tsx";

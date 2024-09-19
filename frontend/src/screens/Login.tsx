@@ -2,6 +2,9 @@
 import { useState } from 'react';
 import {Link, useNavigate} from "react-router-dom";
 
+import BackButton from "../components/BackButton.tsx";
+import LoginButton from "../components/LoginButton.tsx";
+
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -32,7 +35,7 @@ function Login() {
             setErrorMessage('');
             // Aquí podrías almacenar un token JWT o redirigir a otra página
             localStorage.setItem('authToken', token);
-            navigate('/perfil');
+            navigate('/eventos');
         } catch (error) {
             // Manejo de errores en la conexión
             setErrorMessage('Usuario o contraseña incorrectos.');
@@ -41,44 +44,45 @@ function Login() {
 
     return (
         <div className="main-container">
-            <Link to={'/'} className="btn-close btn-back" aria-label="Close"></Link>
-            <h2>Iniciar Sesión</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label className="form-label">Username:</label>
-                    <input
-                        className="form-control"
-                        type="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className={"form-label"}>Password:</label>
-                    <input
-                        className={"form-control"}
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit" className={"btn btn-primary"}>Iniciar Sesión</button>
-                <div style={{margin: '10px 0'}}>
-                    <p>
-                        ¿No tienes una cuenta?{' '}
-                        <Link
-                            to="/register"
-                            style={{textDecoration: "none"}}
-                        >
-                            Regístrate
-                        </Link>
-                    </p>
-                </div>
-                {errorMessage && <p style={{color: 'red', width: '100%', margin: '10px 0'}}>{errorMessage}</p>}
-            </form>
-
+            <div className={"content-container"}>
+                <BackButton link={''}/>
+                <h2>Iniciar Sesión</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                        <label className="form-label">Usuario:</label>
+                        <input
+                            className="form-control"
+                            type="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label className={"form-label"}>Contraseña:</label>
+                        <input
+                            className={"form-control"}
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <LoginButton submit={true}/>
+                    <div style={{margin: '10px 0'}}>
+                        <p>
+                            ¿No tienes una cuenta?{' '}
+                            <Link
+                                to="/register"
+                                style={{textDecoration: "none"}}
+                            >
+                                Regístrate
+                            </Link>
+                        </p>
+                    </div>
+                    {errorMessage && <p style={{color: 'red', width: '100%', margin: '10px 0'}}>{errorMessage}</p>}
+                </form>
+            </div>
         </div>
     );
 }

@@ -19,11 +19,51 @@
     display: flex;
     column-gap: 20px;
 }
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    row-gap: 10px;
+    border-radius: 10px;
+    border-color: #9E9E9E;
+    border-width: 1px;
+    border-style: solid;
+}
 .btn-back {
+    display: flex;
     align-self: flex-start;
-    margin-left: 30%;
 }
 .modelo-check {
     display: flex;
     column-gap: 10px;
+}
+.evento {
+    display: flex;
+    text-decoration: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+    row-gap: 10px;
+    border-radius: 10px;
+    border-color: #9E9E9E;
+    border-width: 1px;
+    border-style: solid;
+    color: black;
+}
+.evento:hover {
+    background-color: #f0f0f0;
+}
+.evento div {
+    display: flex;
+}
+.evento > p {
+    font-weight: bold;
+}
+.evento div p {
+    display: contents;
+    font-weight: 500;
 }
