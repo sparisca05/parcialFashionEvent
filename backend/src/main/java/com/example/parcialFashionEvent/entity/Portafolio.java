@@ -1,5 +1,6 @@
 package com.example.parcialFashionEvent.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -16,8 +17,9 @@ public class Portafolio {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username", nullable = false)
-    private Usuario username;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonBackReference
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "portafolio", cascade = CascadeType.ALL)
     @JsonIgnore

@@ -20,7 +20,7 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthResponse login(LoginRequest request) {
+    public AuthResponse login(LoginRequest request) throws RuntimeException {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
         String token = jwtService.getToken(user);

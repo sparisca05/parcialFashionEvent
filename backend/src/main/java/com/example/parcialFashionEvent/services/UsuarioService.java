@@ -3,6 +3,7 @@ package com.example.parcialFashionEvent.services;
 import com.example.parcialFashionEvent.entity.Portafolio;
 import com.example.parcialFashionEvent.entity.Usuario;
 import com.example.parcialFashionEvent.entity.UsuarioInfo;
+import com.example.parcialFashionEvent.repositories.IPortafolioRepository;
 import com.example.parcialFashionEvent.repositories.IUsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class UsuarioService implements UserDetailsService {
 
     @Autowired
     private IUsuarioRepository userRepository;
+    private final IPortafolioRepository portafolioRepository;
     private final PasswordEncoder passwordEncoder;
 
     public void saveUser(Usuario user) {
@@ -75,9 +77,10 @@ public class UsuarioService implements UserDetailsService {
         Usuario user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
+        portafolio.setUsuario(user);
+        portafolioRepository.save(portafolio);
         user.setPortafolio(portafolio);
-        saveUser(user);
-
+        userRepository.save(user);
         return user;
     }
 

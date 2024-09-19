@@ -35,10 +35,13 @@ public class UsuarioController {
         Usuario usuario = usuarioService.getUserByUsername(username);
         return usuario.getPortafolio();
     }
-
-    @PostMapping
-    public String post() {
-        return "POST: Modelo";
+    // Crear portafolio (solo modelos)
+    @PostMapping("/perfil/portafolio")
+    @PreAuthorize("hasRole('MODELO')")
+    public Portafolio post(@RequestBody Portafolio portafolio) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName(); // Obtener el username del usuario autenticado
+        usuarioService.updatePortafolioByUserId(portafolio, usuarioService.getUserByUsername(username).getId());
+        return portafolio;
     }
 
     // Editar perfil
@@ -48,12 +51,12 @@ public class UsuarioController {
         Long id = usuarioService.getUserByUsername(username).getId();
         return usuarioService.updateUserById(request, id);
     }
-    // Agregar portafolio (solo modelos)
+    // Editar portafolio (solo modelos)
     @PutMapping("/perfil/portafolio")
     @PreAuthorize("hasRole('MODELO')")
-    public String updatePortafolio(@RequestBody String portafolio) {
-        //String username = SecurityContextHolder.getContext().getAuthentication().getName(); // Obtener el username del usuario autenticado
-        //Usuario usuario = usuarioService.updatePortafolioByUserId(portafolio, usuarioService.getUserByUsername(username).getId());
+    public Portafolio updatePortafolio(@RequestBody Portafolio portafolio) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName(); // Obtener el username del usuario autenticado
+        usuarioService.updatePortafolioByUserId(portafolio, usuarioService.getUserByUsername(username).getId());
         return portafolio;
     }
 

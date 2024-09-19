@@ -18,7 +18,11 @@ public class AuthController {
 
     @PostMapping(value = "login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+        try {
+            return ResponseEntity.ok(authService.login(request));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(401).build();
+        }
     }
 
     @PostMapping(value = "register")
