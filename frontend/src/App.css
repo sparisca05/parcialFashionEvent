@@ -1,9 +1,11 @@
 .main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    margin: auto;
 }
 .container {
     display: flex;
@@ -16,4 +18,12 @@
 .auth-container {
     display: flex;
     column-gap: 20px;
+}
+.btn-back {
+    align-self: flex-start;
+    margin-left: 30%;
+}
+.modelo-check {
+    display: flex;
+    column-gap: 10px;
 }

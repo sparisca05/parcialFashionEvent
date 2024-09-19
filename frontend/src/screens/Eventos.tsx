@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {Link} from "react-router-dom";
 
 // Definición del tipo de datos que esperamos
 interface Evento {
@@ -31,13 +32,14 @@ const EventoList: React.FC = () => {
     }
 
     return (
-        <div>
-            <h2>Lista de Eventos</h2>
+        <div className={"main-container"}>
+            <Link to={'/'} className="btn-close btn-back" aria-label="Close"></Link>
+            <h2>Eventos</h2>
             <ul className="list-group">
                 {eventos.map(evento => (
-                    <li key={evento.id} className="list-group-item">
+                    <Link to={`/eventos/${evento.id}`} key={evento.id} className="list-group-item">
                         {evento.nombre} {evento.fecha} {evento.precio}
-                    </li>
+                    </Link>
                 ))}
             </ul>
         </div>

@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Register() {
     const [modelo, setModelo] = useState(false);
@@ -59,61 +59,91 @@ function Register() {
     };
 
     return (
-        <div>
+        <div className={"main-container"}>
+            <Link to={'/'} className="btn-close btn-back" aria-label="Close"></Link>
             <h2>Regístrate</h2>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>¿Eres modelo?</label>
+                <div className={"mb-3 modelo-check"}>
+                    <label className="form-label">¿Eres modelo?</label>
                     <input
+                        className={"form-check-input"}
                         type="checkbox"
                         checked={modelo}
                         onChange={(e) => setModelo(e.target.checked)}
                     />
                 </div>
-                <div>
-                    <label>Nombre:</label>
+                <div className="input-group mb-3">
+                    <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
                     <input
+                        type="text"
+                        className="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
                         value={nombre}
                         onChange={(e) => setNombre(e.target.value)}
                         required
                     />
                 </div>
-                <div>
-                    <label>Apellido:</label>
+                <div className="input-group mb-3">
+                    <span className="input-group-text" id="inputGroup-sizing-default">Apellido</span>
                     <input
+                        type="text"
+                        className="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
                         value={apellido}
                         onChange={(e) => setApellido(e.target.value)}
                         required
                     />
                 </div>
-                <div>
-                    <label>Correo electrónico:</label>
+                <div className="input-group mb-3">
+                    <span className="input-group-text" id="inputGroup-sizing-default">Correo electrónico</span>
                     <input
                         type="email"
+                        className="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
                         value={correo}
                         onChange={(e) => setCorreo(e.target.value)}
                         required
                     />
                 </div>
-                <div>
-                    <label>Username:</label>
+                <div className="input-group mb-3">
+                    <span className="input-group-text" id="inputGroup-sizing-default">Username</span>
                     <input
-                        type="username"
+                        type="text"
+                        className="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </div>
-                <div>
-                    <label>Password:</label>
+                <div className="input-group mb-3">
+                    <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
                     <input
                         type="password"
+                        className="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </div>
-                <button type="submit">Registrarse</button>
+                <button type="submit" className={"btn btn-primary"}>Registrarse</button>
+                <div style={{margin: '10px 0'}}>
+                    <p>
+                        ¿Ya estas registrado?{' '}
+                        <Link
+                            to="/login"
+                            style={{textDecoration: "none"}}
+                        >
+                            Inicia sesión
+                        </Link>
+                    </p>
+                </div>
             </form>
 
             {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}

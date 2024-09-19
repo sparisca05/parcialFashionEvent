@@ -41,6 +41,7 @@ function Login() {
 
     return (
         <div className="main-container">
+            <Link to={'/'} className="btn-close btn-back" aria-label="Close"></Link>
             <h2>Iniciar Sesión</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
@@ -66,11 +67,16 @@ function Login() {
                 <button type="submit" className={"btn btn-primary"}>Iniciar Sesión</button>
                 <div style={{margin: '10px 0'}}>
                     <p>
-                        ¿No tienes una cuenta?
-                        <Link to="/register">Regístrate</Link>
+                        ¿No tienes una cuenta?{' '}
+                        <Link
+                            to="/register"
+                            style={{textDecoration: "none"}}
+                        >
+                            Regístrate
+                        </Link>
                     </p>
                 </div>
-                {errorMessage && <p style={{ color: 'red', width: '100%', margin: '10px 0' }}>{errorMessage}</p>}
+                {errorMessage && <p style={{color: 'red', width: '100%', margin: '10px 0'}}>{errorMessage}</p>}
             </form>
 
         </div>

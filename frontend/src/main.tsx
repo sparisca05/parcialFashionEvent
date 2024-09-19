@@ -7,11 +7,12 @@ import {
     RouterProvider,
 } from "react-router-dom";
 
-import EventosList from "./components/EventosList.tsx";
+import EventosList from "./screens/Eventos.tsx";
 import Profile from "./components/Profile.tsx";
 import Home from "./screens/Home.tsx";
 import Login from "./screens/Login.tsx";
 import Register from "./screens/Register.tsx";
+import EventoView from "./screens/EventoView.tsx";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
     {path: "/login", element: <Login />,},
     {path: "/register", element: <Register />,},
     {path: "/eventos", element: <EventosList />,},
+    {path: "/eventos/:id", element: <EventoView />,},
     {path: "/perfil", element: <Profile />,}
 ]);
 
