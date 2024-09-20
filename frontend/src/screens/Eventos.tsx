@@ -30,7 +30,11 @@ const EventoList: React.FC = () => {
     }, []);  // [] para que la petición solo se ejecute al montar el componente
 
     if (loading) {
-        return <div>Cargando eventos...</div>;
+        return (
+            <div className={"main-container"}>
+                <div>Cargando eventos...</div>
+            </div>
+        );
     }
 
     const noEventosMessage = eventos.length === 0 && <div>No hay eventos disponibles.</div>;

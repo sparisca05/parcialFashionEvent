@@ -56,7 +56,11 @@ const Profile: React.FC = () => {
     }, []);
 
     if (loading) {
-        return <div>Cargando datos...</div>;
+        return (
+            <div className={"main-container"}>
+                <div>Cargando datos...</div>
+            </div>
+        );
     }
 
     if (error) {

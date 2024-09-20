@@ -5,13 +5,13 @@ import ProfileIcon from "./ProfileIcon.tsx";
 import LoginButton from "./LoginButton.tsx";
 import LogoutButton from "./LogoutButton.tsx";
 
+export const isLoggedIn = () => {
+    const token = localStorage.getItem('authToken');
+    return token !== null;
+};
+
 const Navbar = ({ link }: { link: string }) => {
     const location = useLocation();
-
-    const isLoggedIn = () => {
-        const token = localStorage.getItem('authToken');
-        return token !== null;
-    };
 
     return (
         <nav className={"navbar bg-body-tertiary"} style={{width: '100%'}}>

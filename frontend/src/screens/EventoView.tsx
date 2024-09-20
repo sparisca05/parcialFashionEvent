@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 import axios from "axios";
-import {Link, useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import Navbar from "../components/Navbar.tsx";
+import Navbar, { isLoggedIn } from "../components/Navbar.tsx";
 
 interface Evento {
     id: number;
@@ -36,6 +36,14 @@ function EventoView() {
         return <div>No se encontró el evento.</div>;
     }
 
+    const handleBuyTickets = () => {
+        alert("Entradas compradas!");
+    }
+
+    const showAlertNotLogged = () => {
+        alert("Debes iniciar sesión para comprar entradas.");
+    }
+
     return (
         <div className={"main-container"}>
             <div className={"content-container"}>
@@ -43,7 +51,12 @@ function EventoView() {
                 <h2>{evento.nombre}</h2>
                 <p>Fecha: {evento.fecha}</p>
                 <p>Precio: {evento.precio}</p>
-                <Link to={"/"} className={"btn btn-primary"}>Comprar entradas</Link>
+                <button
+                    className={"btn btn-primary"}
+                    onClick={isLoggedIn() ? handleBuyTickets : showAlertNotLogged}
+                >
+                    Comprar entradas
+                </button>
             </div>
         </div>
     );
