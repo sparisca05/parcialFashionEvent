@@ -16,12 +16,20 @@ const Navbar = ({ link }: { link: string }) => {
     return (
         <nav className={"navbar bg-body-tertiary"} style={{width: '100%'}}>
             <div className={"container-fluid"}>
-                {!isLoggedIn() || location.pathname !== '/eventos' && <BackButton link={`${link}`}/>}
-                {location.pathname === '/perfil' ? (
-                    <LogoutButton/>
+                {isLoggedIn() ? (
+                    <>
+                        {location.pathname !== '/eventos' && <BackButton link={`${link}`}/>}
+                        {location.pathname !== '/perfil' ? <ProfileIcon/> : <LogoutButton/>}
+                    </>
                 ) : (
-                    isLoggedIn() ? <ProfileIcon/> : <LoginButton submit={false}/>
+                    <>
+                        <BackButton link={`${link}`}/>
+                        {(location.pathname !== '/login') && (location.pathname !== '/register') &&
+                            <LoginButton submit={false}/>
+                        }
+                    </>
                 )}
+
             </div>
         </nav>
     );
