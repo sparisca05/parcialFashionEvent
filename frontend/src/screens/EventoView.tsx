@@ -46,8 +46,8 @@ function EventoView() {
 
     return (
         <div className={"main-container"}>
+            <Navbar link={'eventos'}/>
             <div className={"content-container"}>
-                <Navbar link={'eventos'}/>
                 <h2>{evento.nombre}</h2>
                 <p>Fecha: {evento.fecha}</p>
                 <p>Precio: {evento.precio}</p>

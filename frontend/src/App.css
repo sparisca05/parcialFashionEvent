@@ -2,10 +2,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     height: 100vh;
-    width: 100%;
     margin: auto;
+}
+.navbar {
+    background-color: #f0f0f0;
+    align-items: center;
+    padding: 30px;
+    min-height: 100px;
+}
+.navbar-profile {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .container {
     display: flex;
@@ -20,28 +35,51 @@
     column-gap: 20px;
 }
 .content-container {
-    min-width: 30%;
+    width: -webkit-fill-available;
+    height: 100%;
+    margin: 30px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 30px;
     row-gap: 10px;
     border-radius: 10px;
-    border-color: #9E9E9E;
+    border-color: black;
     border-width: 1px;
     border-style: solid;
 }
 .btn-back {
     display: flex;
-    align-self: flex-start;
 }
 .modelo-check {
     display: flex;
     column-gap: 10px;
 }
+.eventos {
+    width: -webkit-fill-available;
+    height: 100%;
+    margin: 30px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    border-radius: 10px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}
+.eventos > div {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+}
 .evento {
     display: flex;
+    flex: 1;
+    min-width: 30%;
     text-decoration: none;
     flex-direction: column;
     align-items: center;
@@ -50,7 +88,7 @@
     margin: 10px;
     row-gap: 10px;
     border-radius: 10px;
-    border-color: #9E9E9E;
+    border-color: black;
     border-width: 1px;
     border-style: solid;
     color: black;
@@ -68,3 +106,4 @@
     display: contents;
     font-weight: 500;
 }
+

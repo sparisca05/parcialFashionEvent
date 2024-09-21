@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import {Link, useNavigate} from "react-router-dom";
 
-import BackButton from "../components/BackButton.tsx";
+import Navbar from "../components/Navbar.tsx";
 
 function Register() {
     const [modelo, setModelo] = useState(false);
@@ -62,8 +62,8 @@ function Register() {
 
     return (
         <div className={"main-container"}>
+            <Navbar link={''}/>
             <div className={"content-container"}>
-                <BackButton link={''}/>
                 <h2>Regístrate</h2>
                 <form onSubmit={handleSubmit}>
                     <div className={"mb-3 modelo-check"}>

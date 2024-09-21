@@ -41,11 +41,11 @@ const EventoList: React.FC = () => {
 
     return (
         <div className={"main-container"}>
-            <div className={"content-container"}>
-                <Navbar link={''}/>
+            <Navbar link={''}/>
+            <div className={"eventos"}>
                 <h2>Eventos</h2>
                 {noEventosMessage}
-                <ul className="list-group">
+                <div>
                     {eventos.map(evento => (
                         <Link to={`/eventos/${evento.id}`} key={evento.id} className="evento">
                             <p>
@@ -59,7 +59,7 @@ const EventoList: React.FC = () => {
                             </div>
                         </Link>
                     ))}
-                </ul>
+                </div>
             </div>
         </div>
     );

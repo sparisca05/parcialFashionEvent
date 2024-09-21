@@ -2,8 +2,8 @@
 import { useState } from 'react';
 import {Link, useNavigate} from "react-router-dom";
 
-import BackButton from "../components/BackButton.tsx";
 import LoginButton from "../components/LoginButton.tsx";
+import Navbar from "../components/Navbar.tsx";
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -44,8 +44,8 @@ function Login() {
 
     return (
         <div className="main-container">
+            <Navbar link={''}/>
             <div className={"content-container"}>
-                <BackButton link={''}/>
                 <h2>Iniciar Sesión</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">

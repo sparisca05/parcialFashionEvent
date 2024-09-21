@@ -1,8 +1,9 @@
 import {Link} from "react-router-dom";
 
-const ProfileIcon = () => {
+const ProfileIcon = ({ username }: { username: string }) => {
     return (
-        <Link to={"/perfil"}>
+        <Link to={"/perfil"} className={"btn btn-outline-primary navbar-profile"}>
+            <p style={{margin: 0}}>{username}</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-person"
                  viewBox="0 0 16 16">
                 <path

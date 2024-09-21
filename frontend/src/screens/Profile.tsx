@@ -69,8 +69,8 @@ const Profile: React.FC = () => {
 
     return (
         <div className={"main-container"}>
+            <Navbar link={'eventos'}/>
             <div className={"content-container"}>
-                <Navbar link={'eventos'}/>
                 <h2>Perfil</h2>
                 <ul>
                     {user ? (
