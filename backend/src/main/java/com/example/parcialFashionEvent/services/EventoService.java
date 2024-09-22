@@ -55,20 +55,20 @@ public class EventoService {
     public String addInvitado(String username, Long eventoId) throws RuntimeException {
         Evento evento = getEventoById(eventoId);
         Usuario usuario = usuarioService.getUserByUsername(username);
-        if (!evento.getInvitados().contains(usuario)){
+        if (!evento.getInvitados().contains(username)){
             evento.addInvitado(usuario);
             eventoRepository.save(evento);
+            return username + " se agregó con éxito al evento: " + evento.getNombre();
         } else {
             throw new RuntimeException("Usuario ya agregado al evento");
         }
-        return "Usuario " + username + " se agregó al evento " + evento.getNombre();
     }
 
     @Transactional
     public String addParticipante(String username, Long eventoId) throws RuntimeException {
         Evento evento = getEventoById(eventoId);
         Usuario usuario = usuarioService.getUserByUsername(username);
-        if (!evento.getParticipantes().contains(usuario)){
+        if (!evento.getParticipantes().contains(username)){
             evento.addParticipante(usuario);
             eventoRepository.save(evento);
         } else {

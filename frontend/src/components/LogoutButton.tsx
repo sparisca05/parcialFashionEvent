@@ -5,10 +5,10 @@ const LogoutButton = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        // Elimina el token de autenticación
-        localStorage.removeItem('authToken');
         // Redirige al usuario a la página de login
         navigate('/login');
+        // Elimina el token de autenticación
+        localStorage.removeItem('authToken');
     };
 
     return (

@@ -2,22 +2,20 @@ import { useLocation } from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-import { getToken } from "../screens/Home.tsx";
+import {getToken, isLoggedIn} from "../screens/Home.tsx";
 import BackButton from "./BackButton.tsx";
 import ProfileIcon from "./ProfileIcon.tsx";
 import LoginButton from "./LoginButton.tsx";
 import LogoutButton from "./LogoutButton.tsx";
-
-export const isLoggedIn = () => {
-    const token = getToken();
-    return token !== null;
-};
 
 const Navbar = ({ link }: { link: string }) => {
     const [usuario, setUsuario] = useState('');
     const location = useLocation();
 
     useEffect(() => {
+        if (!isLoggedIn()) {
+            return;
+        }
         axios.get(`http://localhost:8080/api/v1/usuario/perfil`, {
             headers: {
                 'Authorization': 'Bearer ' + getToken(),

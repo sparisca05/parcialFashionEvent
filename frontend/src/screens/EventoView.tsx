@@ -2,7 +2,8 @@ import {useEffect, useState} from 'react';
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import Navbar, { isLoggedIn } from "../components/Navbar.tsx";
+import Navbar from "../components/Navbar.tsx";
+import {getToken} from "./Home.tsx";
 
 interface Evento {
     id: number;
@@ -36,12 +37,25 @@ function EventoView() {
         return <div>No se encontró el evento.</div>;
     }
 
-    const handleBuyTickets = () => {
-        alert("Entradas compradas!");
-    }
+    const handleBuyTickets = async () => {
+        const token = getToken();
+        try {
+            if (!token) {
+                alert("Debes iniciar sesión para comprar entradas.");
+                return;
+            }
+            const response = await fetch(`http://localhost:8080/api/v1/eventos/${id}/comprar-ticket`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json',
+                },
+            });
 
-    const showAlertNotLogged = () => {
-        alert("Debes iniciar sesión para comprar entradas.");
+            alert(await response.text());
+        } catch (err) {
+            alert('Error al comprar las entradas: ' + err);
+        }
     }
 
     return (
@@ -53,7 +67,7 @@ function EventoView() {
                 <p>Precio: {evento.precio}</p>
                 <button
                     className={"btn btn-primary"}
-                    onClick={isLoggedIn() ? handleBuyTickets : showAlertNotLogged}
+                    onClick={handleBuyTickets}
                 >
                     Comprar entradas
                 </button>

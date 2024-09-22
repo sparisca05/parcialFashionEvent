@@ -7,6 +7,11 @@ export const getToken: () => string | null = () => {
     return localStorage.getItem('authToken');
 }
 
+export const isLoggedIn = () => {
+    const token = getToken();
+    return token !== null;
+}
+
 function Home() {
     return (
             <div className="main-container">

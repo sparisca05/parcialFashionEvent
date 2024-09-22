@@ -35,7 +35,11 @@ public class EventoController {
     @PutMapping("/{id}/comprar-ticket")
     public String addInvitado(@PathVariable Long id) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return eventoService.addInvitado(username, id);
+        try {
+            return eventoService.addInvitado(username, id);
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
     }
 
     // Inscribirse a un evento como modelo
