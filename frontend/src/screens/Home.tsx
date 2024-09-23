@@ -16,7 +16,7 @@ function Home() {
     return (
             <div className="main-container">
                 <Navbar link={''}/>
-                <div className={"content-container"}>
+                <div className={"content-container welcome"}>
                     <h3>Esta es la página principal.</h3>
                     <div className="container">
                         <div className="auth-container">

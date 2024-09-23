@@ -63,7 +63,7 @@ function Register() {
     return (
         <div className={"main-container"}>
             <Navbar link={''}/>
-            <div className={"content-container"}>
+            <div className={"content-container welcome"}>
                 <h2>Regístrate</h2>
                 <form onSubmit={handleSubmit}>
                     <div className={"mb-3 modelo-check"}>

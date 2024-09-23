@@ -1,8 +1,10 @@
 package com.example.parcialFashionEvent.services;
 
+import com.example.parcialFashionEvent.entity.Evento;
 import com.example.parcialFashionEvent.entity.Portafolio;
 import com.example.parcialFashionEvent.entity.Usuario;
 import com.example.parcialFashionEvent.entity.UsuarioInfo;
+import com.example.parcialFashionEvent.repositories.IEventoRepository;
 import com.example.parcialFashionEvent.repositories.IPortafolioRepository;
 import com.example.parcialFashionEvent.repositories.IUsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +25,7 @@ public class UsuarioService implements UserDetailsService {
     @Autowired
     private IUsuarioRepository userRepository;
     private final IPortafolioRepository portafolioRepository;
+    private final IEventoRepository eventoRepository;
     private final PasswordEncoder passwordEncoder;
 
     public void saveUser(Usuario user) {
@@ -58,6 +62,10 @@ public class UsuarioService implements UserDetailsService {
                         user.getPassword(),
                         user.getAuthorities()
                 )).orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+    }
+
+    public List<Evento> getMyEvents(Long userId) {
+        return eventoRepository.getEventosByUsuario(userId);
     }
 
     public Usuario updateUserById(Usuario request, Long userId){

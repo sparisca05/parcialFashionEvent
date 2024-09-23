@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import Navbar from "../components/Navbar.tsx";
 
 // Definición del tipo de datos que esperamos
-interface Evento {
+export interface Evento {
     id: number;
     nombre: string;
     fecha: string;
@@ -15,6 +15,7 @@ interface Evento {
 const EventoList: React.FC = () => {
     const [eventos, setEventos] = useState<Evento[]>([]);  // Estado para almacenar la lista de eventos
     const [loading, setLoading] = useState<boolean>(true);     // Estado para mostrar una carga
+    const [error, setError] = useState('');    // Estado para mostrar un error
 
     // Efecto que hace la petición cuando el componente se monta
     useEffect(() => {
@@ -23,8 +24,8 @@ const EventoList: React.FC = () => {
                 setEventos(response.data);
                 setLoading(false);
             })
-            .catch(error => {
-                console.error('Error:', error);
+            .catch(err => {
+                setError('Error: ' + err);
                 setLoading(false);
             });
     }, []);  // [] para que la petición solo se ejecute al montar el componente
@@ -32,6 +33,7 @@ const EventoList: React.FC = () => {
     if (loading) {
         return (
             <div className={"main-container"}>
+                <Navbar link={''}/>
                 <div>Cargando eventos...</div>
             </div>
         );
@@ -42,9 +44,9 @@ const EventoList: React.FC = () => {
     return (
         <div className={"main-container"}>
             <Navbar link={''}/>
-            <div className={"eventos"}>
+            <div className={"content-container eventos"}>
                 <h2>Eventos</h2>
-                {noEventosMessage}
+                {error ? <div>{error}</div> : noEventosMessage}
                 <div>
                     {eventos.map(evento => (
                         <Link to={`/eventos/${evento.id}`} key={evento.id} className="evento">

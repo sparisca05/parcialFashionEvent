@@ -1,13 +1,17 @@
 package com.example.parcialFashionEvent.controllers;
 
+import com.example.parcialFashionEvent.entity.Evento;
 import com.example.parcialFashionEvent.entity.Portafolio;
 import com.example.parcialFashionEvent.entity.Usuario;
 import com.example.parcialFashionEvent.entity.UsuarioInfo;
 import com.example.parcialFashionEvent.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/usuario")
@@ -27,6 +31,15 @@ public class UsuarioController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName(); // Obtener el username del usuario autenticado
         return usuarioService.getUserByUsername(username);
     }
+    // Eventos de usuario
+    @GetMapping("/mis-eventos")
+    public ResponseEntity<List<Evento>> getEventosByUsuario() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName(); // Obtener el username del usuario autenticado
+        Long id = usuarioService.getUserByUsername(username).getId();
+        List<Evento> eventos = usuarioService.getMyEvents(id);
+        return ResponseEntity.ok(eventos);
+    }
+
     // Ver portafolio (solo modelos)
     @GetMapping("/perfil/portafolio")
     @PreAuthorize("hasRole('MODELO')")

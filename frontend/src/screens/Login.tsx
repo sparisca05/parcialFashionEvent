@@ -45,7 +45,7 @@ function Login() {
     return (
         <div className="main-container">
             <Navbar link={''}/>
-            <div className={"content-container"}>
+            <div className={"content-container welcome"}>
                 <h2>Iniciar Sesión</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
