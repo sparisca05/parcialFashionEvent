@@ -1,0 +1,45 @@
+services:
+
+  frontend:
+    container_name: frontend-parcialFashionEvent
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    working_dir: /frontend
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - web-net
+
+  backend:
+    container_name: backend-parcialFashionEvent
+    build: ./backend
+    ports:
+      - "8080:8080"
+    working_dir: /backend
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - web-net
+    env_file: backend/.env
+
+  db:
+    container_name: db-parcialFashionEvent
+    image: postgres:16.2
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Simon2604*
+      POSTGRES_DB: fashion_event
+    ports:
+      - 5433:5432
+    networks:
+      - web-net
+
+volumes:
+  data: {}
+networks:
+  web-net:
+    name: web-net
