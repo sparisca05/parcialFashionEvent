@@ -9,7 +9,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://3.129.43.40:8080', // Dirección HTTP del backend en EC2
+        target: 'http://54.162.233.65:8080', // Dirección HTTP del backend en EC2
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''), // Ajusta el prefijo según sea necesario
       },
