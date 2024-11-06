@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import Navbar from "../components/Navbar.tsx";
 import {getToken} from "./Home.tsx";
+import { API_URL } from '../main.tsx';
 
 interface Evento {
     id: number;
@@ -18,7 +19,7 @@ function EventoView() {
     const [loading, setLoading] = useState<boolean>(true);     // Estado para mostrar una carga
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/v1/eventos/${id}`)
+        axios.get(`${API_URL}/api/v1/eventos/${id}`)
             .then((response) => {
                 setEvento(response.data);
                 setLoading(false);

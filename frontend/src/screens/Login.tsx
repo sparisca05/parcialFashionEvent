@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import {Link, useNavigate} from "react-router-dom";
 
+import { API_URL } from '../main.tsx';
 import LoginButton from "../components/LoginButton.tsx";
 import Navbar from "../components/Navbar.tsx";
 
@@ -23,7 +24,7 @@ function Login() {
 
         try {
             // Realizar el POST al backend
-            const response = await fetch('http://localhost:8080/auth/login', {
+            const response = await fetch(`${API_URL}/auth/login` , {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

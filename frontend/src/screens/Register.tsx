@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import {Link, useNavigate} from "react-router-dom";
 
+import { API_URL } from '../main.tsx';
 import Navbar from "../components/Navbar.tsx";
 
 function Register() {
@@ -31,7 +32,7 @@ function Register() {
 
         try {
             // Realizar el POST al backend
-            const response = await fetch('http://localhost:8080/auth/register', {
+            const response = await fetch(`${API_URL}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

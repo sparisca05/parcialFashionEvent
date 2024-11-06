@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
 
+import { API_URL } from '../main.tsx';
 import Navbar from "../components/Navbar.tsx";
 
 // Definición del tipo de datos que esperamos
@@ -19,7 +20,7 @@ const EventoList: React.FC = () => {
 
     // Efecto que hace la petición cuando el componente se monta
     useEffect(() => {
-        axios.get('http://localhost:8080/api/v1/eventos')
+        axios.get(`${API_URL}/api/v1/eventos`)
             .then((response) => {
                 setEventos(response.data);
                 setLoading(false);
