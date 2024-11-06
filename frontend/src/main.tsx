@@ -14,6 +14,7 @@ import Login from "./screens/Login.tsx";
 import Register from "./screens/Register.tsx";
 import EventoView from "./screens/EventoView.tsx";
 
+
 export const API_URL = 'http://3.129.43.40:8080';
 
 const router = createBrowserRouter([
