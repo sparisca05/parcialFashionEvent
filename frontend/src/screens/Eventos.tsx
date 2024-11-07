@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 
 import { API_URL } from '../main.tsx';
 import Navbar from "../components/Navbar.tsx";
+import {getToken} from "./Home.tsx";
 
 // Definición del tipo de datos que esperamos
 export interface Evento {
@@ -13,10 +14,15 @@ export interface Evento {
     precio: number;
 }
 
+interface Usuario {
+    role: string;
+}
+
 const EventoList: React.FC = () => {
-    const [eventos, setEventos] = useState<Evento[]>([]);  // Estado para almacenar la lista de eventos
-    const [loading, setLoading] = useState<boolean>(true);     // Estado para mostrar una carga
-    const [error, setError] = useState('');    // Estado para mostrar un error
+    const [eventos, setEventos] = useState<Evento[]>([]);
+    const [usuario, setUsuario] = useState<Usuario | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState('');
 
     // Efecto que hace la petición cuando el componente se monta
     useEffect(() => {
@@ -30,6 +36,20 @@ const EventoList: React.FC = () => {
                 setLoading(false);
             });
     }, []);  // [] para que la petición solo se ejecute al montar el componente
+
+    useEffect(() => {
+        axios.get(`${API_URL}/v1/usuario/perfil`, {
+            headers: {
+                'Authorization': 'Bearer ' + getToken(),
+            }
+        })
+            .then((response) => {
+                setUsuario(response.data.username);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }, []);
 
     if (loading) {
         return (
@@ -62,6 +82,11 @@ const EventoList: React.FC = () => {
                             </div>
                         </Link>
                     ))}
+                    {usuario ? usuario.role === 'ADMIN' &&
+                        <Link to={'/eventos/nuevo-evento'} className="btn btn-primary">Nuevo evento</Link>
+                        :
+                        <div>No se pudo encontrar el usuario</div>
+                    }
                 </div>
             </div>
         </div>

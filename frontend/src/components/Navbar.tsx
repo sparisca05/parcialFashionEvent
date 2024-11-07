@@ -7,6 +7,7 @@ import BackButton from "./BackButton.tsx";
 import ProfileIcon from "./ProfileIcon.tsx";
 import LoginButton from "./LoginButton.tsx";
 import LogoutButton from "./LogoutButton.tsx";
+import {API_URL} from "../main.tsx";
 
 const Navbar = ({ link }: { link: string }) => {
     const [usuario, setUsuario] = useState('');
@@ -16,7 +17,7 @@ const Navbar = ({ link }: { link: string }) => {
         if (!isLoggedIn()) {
             return;
         }
-        axios.get(`http://localhost:8080/api/v1/usuario/perfil`, {
+        axios.get(`${API_URL}/api/v1/usuario/perfil`, {
             headers: {
                 'Authorization': 'Bearer ' + getToken(),
             }

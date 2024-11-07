@@ -13,9 +13,9 @@ import Home from "./screens/Home.tsx";
 import Login from "./screens/Login.tsx";
 import Register from "./screens/Register.tsx";
 import EventoView from "./screens/EventoView.tsx";
+import NuevoEvento from "./screens/NuevoEvento.tsx";
 
 export const API_URL = import.meta.env.VITE_API_URL;
-console.log(API_URL);
 
 const router = createBrowserRouter([
     {
@@ -27,6 +27,7 @@ const router = createBrowserRouter([
     {path: "/register", element: <Register />,},
     {path: "/eventos", element: <EventosList />,},
     {path: "/eventos/:id", element: <EventoView />,},
+    {path: "/eventos/nuevo-evento", element: <NuevoEvento />,},
     {path: "/perfil", element: <Profile />,}
 ]);
 
