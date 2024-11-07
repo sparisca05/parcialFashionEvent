@@ -15,6 +15,7 @@ import Register from "./screens/Register.tsx";
 import EventoView from "./screens/EventoView.tsx";
 
 export const API_URL = import.meta.env.VITE_API_URL;
+console.log(API_URL);
 
 const router = createBrowserRouter([
     {
