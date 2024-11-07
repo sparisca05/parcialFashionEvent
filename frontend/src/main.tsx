@@ -14,7 +14,7 @@ import Login from "./screens/Login.tsx";
 import Register from "./screens/Register.tsx";
 import EventoView from "./screens/EventoView.tsx";
 
-export const API_URL = 'http://54.162.233.65:8080';
+export const API_URL = import.meta.env.VITE_API_URL;
 
 const router = createBrowserRouter([
     {
