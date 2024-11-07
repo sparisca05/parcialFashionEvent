@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {getToken} from "../screens/Home.tsx";
+import {API_URL} from "../main.tsx";
 
 // Definición del tipo de datos que esperamos
 interface UserInfo {
@@ -27,7 +28,7 @@ const UserInfo = () => {
 
         const fetchUserData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/v1/usuario/perfil', {
+                const response = await fetch(`${API_URL}/api/v1/usuario/perfil`, {
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + token,
