@@ -40,6 +40,7 @@ function Login() {
         } catch (error) {
             // Manejo de errores en la conexión
             setErrorMessage('Usuario o contraseña incorrectos.');
+            console.log(error);
         }
     };
 

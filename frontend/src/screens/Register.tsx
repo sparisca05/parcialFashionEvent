@@ -56,7 +56,8 @@ function Register() {
             }
         } catch (error) {
             // Manejo de errores en la conexión
-            setErrorMessage('Error de conexión. Por favor, intenta más tarde.' + error);
+            setErrorMessage('Error de conexión. Por favor, intenta más tarde.');
+            console.log(error);
             setSuccessMessage('');
         }
     };
