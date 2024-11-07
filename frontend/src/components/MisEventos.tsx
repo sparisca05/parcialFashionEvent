@@ -4,6 +4,7 @@ import axios from "axios";
 import Navbar from "./Navbar.tsx";
 import {Link} from "react-router-dom";
 import {getToken} from "../screens/Home.tsx";
+import {API_URL} from "../main.tsx";
 
 const MisEventos = () => {
     const [eventos, setEventos] = useState<Evento[]>([]);  // Estado para almacenar la lista de eventos
@@ -14,7 +15,7 @@ const MisEventos = () => {
     useEffect(() => {
         const token = getToken();
 
-        axios.get('http://localhost:8080/api/v1/usuario/mis-eventos', {
+        axios.get(`${API_URL}/api/v1/usuario/mis-eventos`, {
             headers: {
                 'Authorization': 'Bearer ' + token,
             }
