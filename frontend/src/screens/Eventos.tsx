@@ -15,7 +15,7 @@ export interface Evento {
 }
 
 interface Usuario {
-    role: string;
+    rol: string;
 }
 
 const EventoList: React.FC = () => {
@@ -38,13 +38,14 @@ const EventoList: React.FC = () => {
     }, []);  // [] para que la petición solo se ejecute al montar el componente
 
     useEffect(() => {
-        axios.get(`${API_URL}/v1/usuario/perfil`, {
+        axios.get(`${API_URL}/api/v1/usuario/perfil`, {
             headers: {
                 'Authorization': 'Bearer ' + getToken(),
             }
         })
             .then((response) => {
-                setUsuario(response.data.username);
+                setUsuario(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -82,7 +83,7 @@ const EventoList: React.FC = () => {
                             </div>
                         </Link>
                     ))}
-                    {usuario ? usuario.role === 'ADMIN' &&
+                    {usuario ? usuario.rol === 'ADMIN' &&
                         <Link to={'/eventos/nuevo-evento'} className="btn btn-primary">Nuevo evento</Link>
                         :
                         <div>No se pudo encontrar el usuario</div>
