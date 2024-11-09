@@ -69,4 +69,26 @@ public class EventoController {
     public String deleteEvento(@PathVariable Long id) {
         return eventoService.deleteEvento(id);
     }
+
+    // Eliminar un invitado de un evento
+    @DeleteMapping("/{id}/eliminar-invitado")
+    @PreAuthorize("hasAnyAuthority('admin:delete', 'organizador:delete')")
+    public String removeInvitado(@RequestParam String username, @PathVariable Long id) {
+        try {
+            return eventoService.removeInvitado(username, id);
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
+    }
+
+    // Eliminar un participante de un evento
+    @DeleteMapping("/{id}/eliminar-participante")
+    @PreAuthorize("hasAnyAuthority('admin:delete', 'organizador:delete')")
+    public String removeParticipante(@RequestParam String username, @PathVariable Long id) {
+        try {
+            return eventoService.removeParticipante(username, id);
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
+    }
 }

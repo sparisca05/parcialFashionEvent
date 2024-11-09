@@ -63,6 +63,17 @@ public class EventoService {
             throw new RuntimeException("Usuario ya agregado al evento");
         }
     }
+    public String removeInvitado(String username, Long eventoId) throws RuntimeException {
+        Evento evento = getEventoById(eventoId);
+        Usuario usuario = usuarioService.getUserByUsername(username);
+        if (evento.getInvitados().contains(username)){
+            evento.removeInvitado(usuario);
+            eventoRepository.save(evento);
+            return username + " se eliminó con éxito del evento: " + evento.getNombre();
+        } else {
+            throw new RuntimeException("Usuario no encontrado en el evento");
+        }
+    }
 
     @Transactional
     public String addParticipante(String username, Long eventoId) throws RuntimeException {
@@ -75,5 +86,17 @@ public class EventoService {
             throw new RuntimeException("Participante ya se inscribió al evento");
         }
         return "Participante " + username + " se inscribió al evento " + evento.getNombre();
+    }
+
+    public String removeParticipante(String username, Long eventoId) throws RuntimeException {
+        Evento evento = getEventoById(eventoId);
+        Usuario usuario = usuarioService.getUserByUsername(username);
+        if (evento.getParticipantes().contains(username)){
+            evento.removeParticipante(usuario);
+            eventoRepository.save(evento);
+            return username + " se eliminó con éxito del evento: " + evento.getNombre();
+        } else {
+            throw new RuntimeException("Usuario no encontrado en el evento");
+        }
     }
 }
