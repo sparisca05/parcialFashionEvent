@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Evento} from "../screens/Eventos.tsx";
 import axios from "axios";
-import Navbar from "./Navbar.tsx";
 import {Link} from "react-router-dom";
 import {getToken} from "../screens/Home.tsx";
 import {API_URL} from "../main.tsx";
@@ -32,8 +31,7 @@ const MisEventos = () => {
 
     if (loading) {
         return (
-            <div className={"main-container"}>
-                <Navbar link={''}/>
+            <div>
                 <div>Cargando eventos...</div>
             </div>
         );

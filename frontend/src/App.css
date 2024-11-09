@@ -73,7 +73,8 @@
     background-color: white;
     display: flex;
     flex: 1;
-    min-width: 30%;
+    max-width: 200px;
+    height: 250px;
     text-decoration: none;
     flex-direction: column;
     align-items: center;
@@ -97,6 +98,27 @@
 .evento div p {
     display: contents;
     font-weight: 500;
+}
+.nuevo-evento {
+    background-color: var(--bs-primary);
+    color: white;
+    font-weight: 500;
+    font-size: xxx-large;
+}
+.nuevo-evento:hover {
+    background-color: #0c55c6;
+    color: white;
+}
+.list-container {
+    background-color: transparent;
+    width: 12rem;
+    li {
+        background-color: transparent;
+    }
+    button {
+        border: none;
+        background-color: transparent;
+    }
 }
 .profile-container {
     display: flex;

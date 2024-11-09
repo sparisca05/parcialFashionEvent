@@ -41,7 +41,7 @@ const NuevoEvento = () => {
 
     return (
         <div className={"main-container"}>
-            <Navbar link={''}/>
+            <Navbar link={'eventos'}/>
             <div className={"content-container eventos"}>
                 <h2>Nuevo evento</h2>
                 <form onSubmit={handleSubmit}>

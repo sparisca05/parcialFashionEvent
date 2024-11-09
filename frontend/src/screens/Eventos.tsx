@@ -14,13 +14,13 @@ export interface Evento {
     precio: number;
 }
 
-interface Usuario {
+export interface UsuarioRol {
     rol: string;
 }
 
 const EventoList: React.FC = () => {
     const [eventos, setEventos] = useState<Evento[]>([]);
-    const [usuario, setUsuario] = useState<Usuario | null>(null);
+    const [usuario, setUsuario] = useState<UsuarioRol | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState('');
 
@@ -45,7 +45,6 @@ const EventoList: React.FC = () => {
         })
             .then((response) => {
                 setUsuario(response.data);
-                console.log(response.data);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -83,10 +82,8 @@ const EventoList: React.FC = () => {
                             </div>
                         </Link>
                     ))}
-                    {usuario ? usuario.rol === 'ADMIN' &&
-                        <Link to={'/eventos/nuevo-evento'} className="btn btn-primary">Nuevo evento</Link>
-                        :
-                        <div>No se pudo encontrar el usuario</div>
+                    {usuario && usuario.rol === 'ADMIN' &&
+                        <Link to={'/eventos/nuevo-evento'} className="evento nuevo-evento">+</Link>
                     }
                 </div>
             </div>

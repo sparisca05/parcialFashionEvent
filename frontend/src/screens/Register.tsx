@@ -47,7 +47,7 @@ function Register() {
                 setErrorMessage('');
                 // Aquí podrías almacenar un token JWT o redirigir a otra página
                 localStorage.setItem('authToken', token);
-                navigate('/login');
+                navigate('/eventos');
             } else {
                 // Si hay algún error, manejar el error
                 const errorData = await response.json();
