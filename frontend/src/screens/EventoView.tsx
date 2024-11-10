@@ -47,14 +47,14 @@ function EventoView() {
             .catch(error => {
                 console.error('Error:', error);
             });
-    }, [id]);
+    }, [id, token]);
 
     const handleRegisterEvent = async () => {
         if (!token) {
             alert("Debes iniciar sesión como modelo para inscribirte en un evento.");
             return;
         }
-        await axios.put(`${API_URL}/api/v1/eventos/${id}/inscribirse`, {
+        await axios.put(`${API_URL}/api/v1/eventos/${id}/inscribirse`,{}, {
             headers: {
                 'Authorization': 'Bearer ' + token,
                 'Content-Type': 'application/json',
@@ -74,10 +74,9 @@ function EventoView() {
             alert("Debes iniciar sesión para comprar entradas.");
             return;
         }
-        await axios.put(`${API_URL}/api/v1/eventos/${id}/comprar-ticket`, {
+        await axios.put(`${API_URL}/api/v1/eventos/${id}/comprar-ticket`, {}, {
             headers: {
                 'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json',
             },
         })
             .then((response) => {
@@ -158,7 +157,7 @@ function EventoView() {
                                         onClick={() => displayInvitados[1](true)}
                                         className={"btn btn-primary"}
                                     >
-                                        Ver participantes
+                                        Ver asistentes
                                     </button>
                                     {displayInvitados[0] && (
                                         <div style={{display: 'flex', columnGap: '40px'}}>
