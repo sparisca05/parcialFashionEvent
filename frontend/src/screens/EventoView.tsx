@@ -159,6 +159,14 @@ function EventoView() {
                                     >
                                         Ver asistentes
                                     </button>
+
+                                    <button
+                                        onClick={() => displayInvitados[1](true)}
+                                        className={"btn btn-primary"}
+                                    >
+                                        Editar
+                                    </button>
+
                                     {displayInvitados[0] && (
                                         <div style={{display: 'flex', columnGap: '40px'}}>
                                             <div>
