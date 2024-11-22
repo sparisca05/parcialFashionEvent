@@ -64,95 +64,97 @@ function Register() {
 
     return (
         <div className={"main-container"}>
-            <Navbar link={''}/>
-            <div className={"content-container welcome"}>
-                <h2>Regístrate</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className={"mb-3 modelo-check"}>
-                        <label>¿Eres modelo?</label>
-                        <input
-                            className={"form-check-input"}
-                            type="checkbox"
-                            checked={modelo}
-                            onChange={(e) => setModelo(e.target.checked)}
-                        />
-                    </div>
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
-                        <input
-                            type="text"
-                            className="form-control"
-                            aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default"
-                            value={nombre}
-                            onChange={(e) => setNombre(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="inputGroup-sizing-default">Apellido</span>
-                        <input
-                            type="text"
-                            className="form-control"
-                            aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default"
-                            value={apellido}
-                            onChange={(e) => setApellido(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="inputGroup-sizing-default">Correo</span>
-                        <input
-                            type="email"
-                            className="form-control"
-                            aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default"
-                            value={correo}
-                            onChange={(e) => setCorreo(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="inputGroup-sizing-default">Usuario</span>
-                        <input
-                            type="text"
-                            className="form-control"
-                            aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
-                        <input
-                            type="password"
-                            className="form-control"
-                            aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <button type="submit" className={"btn btn-primary"}>Registrarse</button>
-                    <div style={{margin: '10px 0'}}>
-                        <p>
-                            ¿Ya estas registrado?{' '}
-                            <Link
-                                to="/login"
-                                style={{textDecoration: "none"}}
-                            >
-                                Inicia sesión
-                            </Link>
-                        </p>
-                    </div>
-                </form>
+            <Navbar />
+            <div className={"welcome"}>
+                <div className={"auth-container"}>
+                    <h2>Regístrate</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className={"mb-3 modelo-check"}>
+                            <label>¿Eres modelo?</label>
+                            <input
+                                className={"form-check-input"}
+                                type="checkbox"
+                                checked={modelo}
+                                onChange={(e) => setModelo(e.target.checked)}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <span className="form-label" id="inputGroup-sizing-default">Nombre</span>
+                            <input
+                                type="text"
+                                className="form-control"
+                                aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default"
+                                value={nombre}
+                                onChange={(e) => setNombre(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <span className="form-label" id="inputGroup-sizing-default">Apellido</span>
+                            <input
+                                type="text"
+                                className="form-control"
+                                aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default"
+                                value={apellido}
+                                onChange={(e) => setApellido(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <span className="form-label" id="inputGroup-sizing-default">Correo</span>
+                            <input
+                                type="email"
+                                className="form-control"
+                                aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default"
+                                value={correo}
+                                onChange={(e) => setCorreo(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <span className="form-label" id="inputGroup-sizing-default">Usuario</span>
+                            <input
+                                type="text"
+                                className="form-control"
+                                aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <span className="form-label" id="inputGroup-sizing-default">Contraseña</span>
+                            <input
+                                type="password"
+                                className="form-control"
+                                aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className={"btn btn-primary"}>Registrarse</button>
+                        <div style={{margin: '10px 0'}}>
+                            <p>
+                                ¿Ya estas registrado?{' '}
+                                <Link
+                                    to="/login"
+                                    style={{textDecoration: "none"}}
+                                >
+                                    Inicia sesión
+                                </Link>
+                            </p>
+                        </div>
+                    </form>
 
-                {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
-                {successMessage && <p style={{color: 'green'}}>{successMessage}</p>}
+                    {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
+                    {successMessage && <p style={{color: 'green'}}>{successMessage}</p>}
+                </div>
             </div>
         </div>
     );

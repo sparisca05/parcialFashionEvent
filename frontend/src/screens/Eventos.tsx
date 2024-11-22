@@ -38,6 +38,9 @@ const EventoList: React.FC = () => {
     }, []);  // [] para que la petición solo se ejecute al montar el componente
 
     useEffect(() => {
+        if (!getToken()) {
+            return;
+        }
         axios.get(`${API_URL}/api/v1/usuario/perfil`, {
             headers: {
                 'Authorization': 'Bearer ' + getToken(),
@@ -54,8 +57,14 @@ const EventoList: React.FC = () => {
     if (loading) {
         return (
             <div className={"main-container"}>
-                <Navbar link={''}/>
-                <div>Cargando eventos...</div>
+                <Navbar />
+                <div className={"welcome"}>
+                    <div className={"content-container"}>
+                        <h4>
+                            Cargando eventos...
+                        </h4>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -64,27 +73,29 @@ const EventoList: React.FC = () => {
 
     return (
         <div className={"main-container"}>
-            <Navbar link={''}/>
-            <div className={"content-container eventos"}>
-                <h2>Eventos</h2>
-                {error ? <div>{error}</div> : noEventosMessage}
-                <div>
-                    {eventos.map(evento => (
-                        <Link to={`/eventos/${evento.id}`} key={evento.id} className="evento">
-                            <p>
-                                {evento.nombre}
-                            </p>
-                            <div>
-                                <p>Fecha: </p>{evento.fecha}
-                            </div>
-                            <div>
-                                <p>Precio: $</p>{evento.precio}
-                            </div>
-                        </Link>
-                    ))}
-                    {usuario && usuario.rol === 'ADMIN' &&
-                        <Link to={'/eventos/nuevo-evento'} className="evento nuevo-evento">+</Link>
-                    }
+            <Navbar />
+            <div className={"welcome"}>
+                <div className={"content-container eventos"}>
+                    <h2>Eventos</h2>
+                    {error ? <div>{error}</div> : noEventosMessage}
+                    <div>
+                        {eventos.map(evento => (
+                            <Link to={`/eventos/${evento.id}`} key={evento.id} className="evento">
+                                <p>
+                                    {evento.nombre}
+                                </p>
+                                <div>
+                                    <p>Fecha: </p>{evento.fecha}
+                                </div>
+                                <div>
+                                    <p>Precio: $</p>{evento.precio}
+                                </div>
+                            </Link>
+                        ))}
+                        {usuario && usuario.rol === 'ADMIN' &&
+                            <Link to={'/eventos/nuevo-evento'} className="evento nuevo-evento">+</Link>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

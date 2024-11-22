@@ -41,48 +41,50 @@ const NuevoEvento = () => {
 
     return (
         <div className={"main-container"}>
-            <Navbar link={'eventos'}/>
-            <div className={"content-container eventos"}>
-                <h2>Nuevo evento</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
-                        <input
-                            type="text"
-                            className="form-control"
-                            aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default"
-                            value={nombre}
-                            onChange={(e) => setNombre(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="inputGroup-sizing-default">Fecha</span>
-                        <input
-                            type="date"
-                            className="form-control"
-                            aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default"
-                            value={fecha}
-                            onChange={(e) => setFecha(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="inputGroup-sizing-default">Precio</span>
-                        <input
-                            type="number"
-                            className="form-control"
-                            aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default"
-                            value={precio}
-                            onChange={(e) => setPrecio(parseInt(e.target.value))}
-                            required
-                        />
-                    </div>
-                    <button type="submit" className="btn btn-primary">Crear evento</button>
-                </form>
+            <Navbar />
+            <div className={"welcome"}>
+                <div className={"auth-container"}>
+                    <h2>Nuevo evento</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="input-group mb-3">
+                            <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+                            <input
+                                type="text"
+                                className="form-control"
+                                aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default"
+                                value={nombre}
+                                onChange={(e) => setNombre(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="input-group mb-3">
+                            <span className="input-group-text" id="inputGroup-sizing-default">Fecha</span>
+                            <input
+                                type="date"
+                                className="form-control"
+                                aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default"
+                                value={fecha}
+                                onChange={(e) => setFecha(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="input-group mb-3">
+                            <span className="input-group-text" id="inputGroup-sizing-default">Precio</span>
+                            <input
+                                type="number"
+                                className="form-control"
+                                aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default"
+                                value={precio}
+                                onChange={(e) => setPrecio(parseInt(e.target.value))}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Crear evento</button>
+                    </form>
+                </div>
             </div>
         </div>
     );

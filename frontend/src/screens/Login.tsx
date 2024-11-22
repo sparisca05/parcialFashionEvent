@@ -46,44 +46,46 @@ function Login() {
 
     return (
         <div className="main-container">
-            <Navbar link={''}/>
-            <div className={"content-container welcome"}>
-                <h2>Iniciar Sesión</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label className="form-label">Usuario:</label>
-                        <input
-                            className="form-control"
-                            type="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label className={"form-label"}>Contraseña:</label>
-                        <input
-                            className={"form-control"}
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <LoginButton submit={true}/>
-                    <div style={{margin: '10px 0'}}>
-                        <p>
-                            ¿No tienes una cuenta?{' '}
-                            <Link
-                                to="/register"
-                                style={{textDecoration: "none"}}
-                            >
-                                Regístrate
-                            </Link>
-                        </p>
-                    </div>
-                    {errorMessage && <p style={{color: 'red', width: '100%', margin: '10px 0'}}>{errorMessage}</p>}
-                </form>
+            <Navbar />
+            <div className={"welcome"}>
+                <div className={"auth-container"}>
+                    <h2>Iniciar Sesión</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label className="form-label">Usuario:</label>
+                            <input
+                                className="form-control"
+                                type="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className={"form-label"}>Contraseña:</label>
+                            <input
+                                className={"form-control"}
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <LoginButton submit={true}/>
+                        <div style={{margin: '10px 0'}}>
+                            <p>
+                                ¿No tienes una cuenta?{' '}
+                                <Link
+                                    to="/register"
+                                    style={{textDecoration: "none"}}
+                                >
+                                    Regístrate
+                                </Link>
+                            </p>
+                        </div>
+                        {errorMessage && <p style={{color: 'red', width: '100%', margin: '10px 0'}}>{errorMessage}</p>}
+                    </form>
+                </div>
             </div>
         </div>
     );

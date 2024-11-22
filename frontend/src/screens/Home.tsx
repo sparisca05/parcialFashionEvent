@@ -15,16 +15,10 @@ export const isLoggedIn = () => {
 function Home() {
     return (
             <div className="main-container">
-                <Navbar link={''}/>
-                <div className={"content-container welcome"}>
-                    <h3>Esta es la página principal.</h3>
-                    <div className="container">
-                        <div className="auth-container">
-                            <Link to={"/login"} className="btn btn-primary">Iniciar sesión</Link>
-                            <Link to={"/register"} className="btn btn-outline-primary">Registrarse</Link>
-                        </div>
-                        <Link to={"/eventos"} style={{textDecoration: "none"}}>Ver todos los eventos </Link>
-                    </div>
+                <Navbar />
+                <div className={"welcome"}>
+                    <h3>Disfruta de espectáculos de talla mundial en cualquiera de los escenarios que ofrecemos</h3>
+                    <Link to={"/eventos"} className={"btn btn-light"}>¡Conoce todos nuestros eventos!</Link>
                 </div>
             </div>
     );

@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import {useParams} from "react-router-dom";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaPencilAlt } from "react-icons/fa";
 
 import Navbar from "../components/Navbar.tsx";
 import {getToken} from "./Home.tsx";
@@ -22,7 +22,7 @@ function EventoView() {
     const { id } = useParams<{ id: string }>();
     const [evento, setEvento] = useState<Evento>();  // Estado para almacenar la lista de eventos
     const [usuario, setUsuario] = useState<UsuarioRol | null>(null);
-    const displayInvitados = useState<boolean>(false);
+    const [displayInvitados, setDisplayInvitados] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);     // Estado para mostrar una carga
 
     useEffect(() => {
@@ -125,73 +125,89 @@ function EventoView() {
 
     return (
         <div className={"main-container"}>
-            <Navbar link={'eventos'}/>
-            <div className={"content-container"}>
-                {loading ? <div>Cargando evento...</div>
-                : (
-                    <>
-                    {!evento ? <div>Evento no encontrado</div>
+            <Navbar />
+            <div className={"welcome"}>
+                <div className={"auth-container"}>
+                    {loading ? <h4>Cargando evento...</h4>
                     : (
                         <>
-                            <h2>{evento.nombre}</h2>
-                            <p>Fecha: {evento.fecha}</p>
-                            <p>Precio: {evento.precio}</p>
-                            {usuario && usuario.rol === 'MODELO' ? (
-                                <button
-                                    className={"btn btn-primary"}
-                                    onClick={handleRegisterEvent}
-                                >
-                                    Inscribirse
-                                </button>
-                            ) : (
-                                <button
-                                    className={"btn btn-primary"}
-                                    onClick={handleBuyTickets}
-                                >
-                                    Comprar entradas
-                                </button>
-                            )}
-                            {usuario?.rol === 'ADMIN' && (
-                                <>
-                                    <button
-                                        onClick={() => displayInvitados[1](true)}
-                                        className={"btn btn-primary"}
-                                    >
-                                        Ver asistentes
+                        {!evento ? <div>Evento no encontrado</div>
+                        : (
+                            <>
+                                {usuario?.rol === 'ADMIN' && (
+                                    <button style={{alignSelf: 'flex-end'}}>
+                                        <FaPencilAlt />
                                     </button>
-                                    {displayInvitados[0] && (
-                                        <div style={{display: 'flex', columnGap: '40px'}}>
-                                            <div>
-                                                <h3>Invitados</h3>
-                                                <ul className={"list-container list-group list-group-flush"}>
-                                                    {evento.invitados.map((invitado, index) => (
-                                                        <li className={"list-group-item d-flex justify-content-between align-items-center"} key={index}>
-                                                            {invitado}
-                                                            <button onClick={() => handleRemoveInvitado(invitado)} style={{color: "red"}}><FaTrash /></button>
-                                                        </li>
-                                                    ))}
-                                                </ul>
+                                )}
+                                <h2>{evento.nombre}</h2>
+                                <p>Fecha: {evento.fecha}</p>
+                                <p>Precio: {evento.precio}</p>
+                                {usuario && usuario.rol === 'MODELO' ? (
+                                    <button
+                                        className={"btn btn-primary"}
+                                        onClick={handleRegisterEvent}
+                                    >
+                                        Inscribirse
+                                    </button>
+                                ) : (
+                                    <button
+                                        className={"btn btn-primary"}
+                                        onClick={handleBuyTickets}
+                                    >
+                                        Comprar entradas
+                                    </button>
+                                )}
+                                {usuario?.rol === 'ADMIN' && (
+                                    <>
+                                        {!displayInvitados ? (
+                                            <button
+                                                onClick={() => setDisplayInvitados(true)}
+                                                className={"btn btn-primary"}
+                                            >
+                                                Ver asistentes
+                                            </button>
+                                        ): (
+                                            <button
+                                                onClick={() => setDisplayInvitados(false)}
+                                                className={"btn btn-primary"}
+                                            >
+                                                Ocultar asistentes
+                                            </button>
+                                        )}
+                                        {displayInvitados && (
+                                            <div style={{display: 'flex', columnGap: '40px'}}>
+                                                <div>
+                                                    <h4>Invitados</h4>
+                                                    <ul className={"list-container list-group list-group-flush"}>
+                                                        {evento.invitados.map((invitado, index) => (
+                                                            <li className={"list-group-item d-flex justify-content-between align-items-center"} key={index}>
+                                                                {invitado}
+                                                                <button onClick={() => handleRemoveInvitado(invitado)} style={{color: "red"}}><FaTrash /></button>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                                <div>
+                                                    <h4>Participantes</h4>
+                                                    <ul className={"list-container list-group list-group-flush"}>
+                                                        {evento.participantes.map((participante, index) => (
+                                                            <li className={"list-group-item d-flex justify-content-between align-items-center"} key={index}>
+                                                                {participante}
+                                                                <span onClick={() => handleRemoveParticipante(participante)} style={{color: "red"}}><FaTrash /></span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <h3>Participantes</h3>
-                                                <ul className={"list-container list-group list-group-flush"}>
-                                                    {evento.participantes.map((participante, index) => (
-                                                        <li className={"list-group-item d-flex justify-content-between align-items-center"} key={index}>
-                                                            {participante}
-                                                            <span onClick={() => handleRemoveParticipante(participante)} style={{color: "red"}}><FaTrash /></span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    )
-                                    }
-                                </>
-                            )}
+                                        )
+                                        }
+                                    </>
+                                )}
+                            </>
+                        )}
                         </>
                     )}
-                    </>
-                )}
+                </div>
             </div>
         </div>
     );

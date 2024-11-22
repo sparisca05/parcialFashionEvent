@@ -81,7 +81,7 @@ const UserInfo = () => {
                             </p>
                         </div>
                         <p>
-                            {user.rol}
+                            Rol: {user.rol}
                         </p>
                     </div>
                 ) : (

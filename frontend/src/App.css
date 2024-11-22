@@ -1,27 +1,33 @@
+button {
+    border: none;
+    background-color: transparent;
+}
 .main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
+    min-height: 100vh;
     margin: auto;
 }
 .navbar {
-    background-color: rgba(197, 197, 197, 0.35);
     align-items: center;
     padding: 30px;
     min-height: 100px;
     border-bottom: 1px solid rgba(186,186,186,0.78);
 }
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 40px;
+    font-weight: 500;
+    font-size: larger;
+}
 .navbar-profile {
     display: flex;
     align-items: center;
     column-gap: 10px;
-}
-.title {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
 }
 .container {
     display: flex;
@@ -31,15 +37,10 @@
     width: 100%;
     row-gap: 20px;
 }
-.auth-container {
-    display: flex;
-    column-gap: 20px;
-}
 .content-container {
-    background-color: rgba(197, 197, 197, 0.35);
+    background-color: rgba(197, 197, 197, 0.82);
     width: -webkit-fill-available;
-    height: 100%;
-    margin: 30px;
+    flex: 1;
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -50,8 +51,36 @@
     border: 1px solid rgba(186,186,186,0.78);
 }
 .welcome {
-    height: unset;
-    width: unset;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    background-image:
+            linear-gradient(#00000077, #00000077),
+            url("assets/home-background.jpeg")
+    ;
+    background-size: cover;
+    background-position: center;
+    h3 {
+        color: white;
+        font-size: 3em;
+        font-weight: 500;
+        text-align: center;
+    }
+    padding: 30px;
+}
+.auth-container {
+    background-color: rgba(197, 197, 197, 0.82);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 20px;
+    padding: 50px;
+    border-radius: 10px;
 }
 .btn-back {
     display: flex;
@@ -72,8 +101,7 @@
 .evento {
     background-color: white;
     display: flex;
-    flex: 1;
-    max-width: 200px;
+    width: 200px;
     height: 250px;
     text-decoration: none;
     flex-direction: column;
@@ -115,17 +143,12 @@
     li {
         background-color: transparent;
     }
-    button {
-        border: none;
-        background-color: transparent;
-    }
 }
 .profile-container {
     display: flex;
     flex-direction: row;
-    width: calc(100% - 40px);
-    height: 100%;
-    margin: 20px;
+    flex: 1;
+    width: 100%;
     column-gap: 20px;
 }
 .profile-container > div {
