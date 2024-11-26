@@ -37,7 +37,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .csrf(AbstractHttpConfigurer::disable) // Deshabilitar CSRF para APIs sin estado
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers("/auth/**").permitAll() // Permitir acceso sin autenticación
+                                .requestMatchers("/auth/**", "/process_payment").permitAll() // Permitir acceso sin autenticación
                                 .requestMatchers(GET, "api/v1/eventos", "api/v1/eventos/**").permitAll() // Permitir ver eventos sin autenticación
 
                                 .requestMatchers("/api/v1/organizador/**").hasAnyRole(ADMIN.name(), ORGANIZADOR.name())
