@@ -113,11 +113,20 @@ function EventoView() {
                 console.error('Error:', error);
             });
     }
+    const handleTokenGenerated = (token: string) => {
+        console.log("Token recibido:", token);
+        // Aquí envías el token a tu backend para procesar el pago
+    };
 
     return (
         <div className={"main-container"}>
             <Navbar />
-            {displayPayment && <PaymentForm />}
+            {displayPayment &&
+                <PaymentForm
+                    publicKey="TEST-04ca89c7-dbd4-4cea-a530-836c81d44796"
+                    onTokenGenerated={handleTokenGenerated}
+                />
+            }
             <div className={"welcome"}>
                 <div className={"auth-container"}>
                     {loading ? <h4>Cargando evento...</h4>
